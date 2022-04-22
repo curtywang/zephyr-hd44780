@@ -1,19 +1,84 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
 {
     "configurations": [
         {
-            "name": "Linux",
+            "name": "PlatformIO",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${env:HOME}/repos/zephyrproject/**",
-                "${env:HOME}/repos/zephyrproject/zephyr/**",
-                "${env:HOME}/repos/zephyrproject/zephyr/include/**",
-                "${env:HOME}/repos/zephyrproject/zephyr/modules/**"
+                "/home/curt/GitHub/zephyr-hd44780/include",
+                "/home/curt/GitHub/zephyr-hd44780/src",
+                "/home/curt/.platformio/packages/framework-zephyr/include",
+                "/home/curt/GitHub/zephyr-hd44780/.pio/build/disco_l475vg_iot01a/zephyr/include/generated",
+                "/home/curt/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32l4",
+                "/home/curt/.platformio/packages/framework-zephyr/drivers",
+                "/home/curt/.platformio/packages/framework-zephyr/soc/arm/st_stm32/common",
+                "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/cmsis/CMSIS/Core/Include",
+                "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/soc",
+                "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include",
+                "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include/Legacy",
+                "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                "/home/curt/GitHub/zephyr-hd44780/lib/ZephyrHD44780/src",
+                "/home/curt/.platformio/packages/tool-unity",
+                ""
             ],
-            "defines": [],
-            "compilerPath": "${env:HOME}/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "linux-gcc-x86"
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/curt/GitHub/zephyr-hd44780/include",
+                    "/home/curt/GitHub/zephyr-hd44780/src",
+                    "/home/curt/.platformio/packages/framework-zephyr/include",
+                    "/home/curt/GitHub/zephyr-hd44780/.pio/build/disco_l475vg_iot01a/zephyr/include/generated",
+                    "/home/curt/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32l4",
+                    "/home/curt/.platformio/packages/framework-zephyr/drivers",
+                    "/home/curt/.platformio/packages/framework-zephyr/soc/arm/st_stm32/common",
+                    "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/cmsis/CMSIS/Core/Include",
+                    "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/soc",
+                    "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include",
+                    "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include/Legacy",
+                    "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                    "/home/curt/GitHub/zephyr-hd44780/lib/ZephyrHD44780/src",
+                    "/home/curt/.platformio/packages/tool-unity",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=50205",
+                "STM32L475xx",
+                "BUILD_VERSION=zephyr-v20701",
+                "CORE_CM4",
+                "HSE_VALUE=8000000",
+                "KERNEL",
+                "STM32L475xx",
+                "USE_FULL_LL_DRIVER",
+                "USE_HAL_DRIVER",
+                "_FORTIFY_SOURCE=2",
+                "__PROGRAM_START",
+                "__ZEPHYR__=1",
+                ""
+            ],
+            "cStandard": "c99",
+            "forcedInclude": [
+                "/home/curt/GitHub/zephyr-hd44780/.pio/build/disco_l475vg_iot01a/zephyr/include/generated/autoconf.h",
+                "/home/curt/.platformio/packages/framework-zephyr/include/toolchain/zephyr_stdint.h",
+                ""
+            ],
+            "compilerPath": "/home/curt/.platformio/packages/toolchain-gccarmnoneeabi@1.80201.181220/bin/arm-none-eabi-gcc",
+            "compilerArgs": [
+                "-mcpu=cortex-m4",
+                "-mthumb",
+                "-mabi=aapcs",
+                "-mfp16-format=ieee",
+                "-isystem",
+                "/home/curt/.platformio/packages/framework-zephyr/lib/libc/minimal/include",
+                "-isystem",
+                "/home/curt/.platformio/packages/toolchain-gccarmnoneeabi@1.80201.181220/bin/../lib/gcc/arm-none-eabi/8.2.1/include",
+                "-isystem",
+                "/home/curt/.platformio/packages/toolchain-gccarmnoneeabi@1.80201.181220/bin/../lib/gcc/arm-none-eabi/8.2.1/include-fixed",
+                ""
+            ]
         }
     ],
     "version": 4
