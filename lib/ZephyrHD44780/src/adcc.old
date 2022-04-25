@@ -6,7 +6,6 @@
 // based on https://github.com/zephyrproject-rtos/zephyr/blob/master/tests/drivers/adc/adc_api/src/test_adc.c
 
 // NRF52 specific
-#include <hal/nrf_saadc.h>
 #define ADC_RESOLUTION		10
 #define ADC_GAIN		ADC_GAIN_1_6
 #define ADC_REFERENCE		ADC_REF_INTERNAL

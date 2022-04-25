@@ -2,25 +2,28 @@
 #define HD44780_H
 
 #include <zephyr.h>
+#include <device.h>
+#include <devicetree.h>
+#include <stdint.h>
+#include <drivers/gpio.h>
 
-/* LCD shield pinout
- *  Ard nRF     Usage
- *  A0  0.03    Buttons
- *  D4  0.15    DB4
- *  D5  0.16    DB5
- *  D6  0.17    DB6
- *  D7  0.18    DB7
- *  D8  0.19    RS
- *  D9  0.20    EN
+/* LCD shield pinout uses DT specs because GPIO ports differ by pin
+ *  Ard Usage
+ *  A0  Buttons
+ *  D4  DB4
+ *  D5  DB5
+ *  D6  DB6
+ *  D7  DB7
+ *  D8  RS
+ *  D9  EN
  */
 
-#define HD44780_PORT   "GPIO_0"
-#define HD44780_PIN_D4 (15)
-#define HD44780_PIN_D5 (16)
-#define HD44780_PIN_D6 (17)
-#define HD44780_PIN_D7 (18)
-#define HD44780_PIN_RS (19)
-#define HD44780_PIN_EN (20)
+#define HD44780_PIN_D4 GPIO_DT_SPEC_GET(DT_ALIAS(dfr0009d4), gpios)
+#define HD44780_PIN_D5 GPIO_DT_SPEC_GET(DT_NODELABEL(dfr0009), hd44780_pin_d5)
+#define HD44780_PIN_D6 GPIO_DT_SPEC_GET(DT_NODELABEL(dfr0009), hd44780_pin_d6)
+#define HD44780_PIN_D7 GPIO_DT_SPEC_GET(DT_NODELABEL(dfr0009), hd44780_pin_d7)
+#define HD44780_PIN_RS GPIO_DT_SPEC_GET(DT_NODELABEL(dfr0009), hd44780_pin_rs)
+#define HD44780_PIN_EN GPIO_DT_SPEC_GET(DT_NODELABEL(dfr0009), hd44780_pin_en)
 
 enum hd44780_pins
 {
@@ -66,8 +69,7 @@ enum hd44780_cmds
 
 struct hd44780_display
 {
-    const struct device *port;
-    uint32_t pin[PINS_MAX];
+    struct gpio_dt_spec pin_dt[PINS_MAX];
 };
 
 void hd44780_init();

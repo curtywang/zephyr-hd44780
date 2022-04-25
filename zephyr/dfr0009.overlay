@@ -1,0 +1,39 @@
+/ {
+    dfr0009 {
+        compatible = "lcd1602", "hd44780", "gpio-keys";
+        status = "okay";
+        label = "hd44780";
+ 
+        hd44780_pin_d4: pin_d4 {
+            gpios = <&arduino_header 10 GPIO_ACTIVE_HIGH>;
+            label = "D4";
+        };
+        
+    //     gpio_keys {
+    //         compatible = "gpio-keys";
+    //         d4: hd44780_pin_d4 {
+    //             gpios = <&arduino_header 10 GPIO_ACTIVE_HIGH>;
+    //         }; 
+    //         d5: hd44780_pin_d5 {
+    //             gpios = <&arduino_header 11 GPIO_ACTIVE_HIGH>;
+    //         }; 
+    //         d6: hd44780_pin_d6 {
+    //             gpios = <&arduino_header 12 GPIO_ACTIVE_HIGH>;
+    //         }; 
+    //         d7: hd44780_pin_d7 {
+    //             gpios = <&arduino_header 13 GPIO_ACTIVE_HIGH>;
+    //         }; 
+    //         d4: hd44780_pin_rs {
+    //             gpios = <&arduino_header 14 GPIO_ACTIVE_HIGH>;
+    //         }; 
+    //         d4: hd44780_pin_en {
+    //             gpios = <&arduino_header 15 GPIO_ACTIVE_HIGH>;
+    //         }; 
+    //     };
+        
+    };
+
+    aliases {
+        dfr0009d4 = &hd44780_pin_d4;
+    };
+};

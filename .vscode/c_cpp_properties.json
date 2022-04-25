@@ -10,6 +10,7 @@
             "includePath": [
                 "/home/curt/GitHub/zephyr-hd44780/include",
                 "/home/curt/GitHub/zephyr-hd44780/src",
+                "/home/curt/GitHub/zephyr-hd44780/lib/ZephyrHD44780/src",
                 "/home/curt/.platformio/packages/framework-zephyr/include",
                 "/home/curt/GitHub/zephyr-hd44780/.pio/build/disco_l475vg_iot01a/zephyr/include/generated",
                 "/home/curt/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32l4",
@@ -20,7 +21,6 @@
                 "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include",
                 "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include/Legacy",
                 "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
-                "/home/curt/GitHub/zephyr-hd44780/lib/ZephyrHD44780/src",
                 "/home/curt/.platformio/packages/tool-unity",
                 ""
             ],
@@ -29,6 +29,7 @@
                 "path": [
                     "/home/curt/GitHub/zephyr-hd44780/include",
                     "/home/curt/GitHub/zephyr-hd44780/src",
+                    "/home/curt/GitHub/zephyr-hd44780/lib/ZephyrHD44780/src",
                     "/home/curt/.platformio/packages/framework-zephyr/include",
                     "/home/curt/GitHub/zephyr-hd44780/.pio/build/disco_l475vg_iot01a/zephyr/include/generated",
                     "/home/curt/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32l4",
@@ -39,7 +40,6 @@
                     "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include",
                     "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32l4xx/drivers/include/Legacy",
                     "/home/curt/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
-                    "/home/curt/GitHub/zephyr-hd44780/lib/ZephyrHD44780/src",
                     "/home/curt/.platformio/packages/tool-unity",
                     ""
                 ]

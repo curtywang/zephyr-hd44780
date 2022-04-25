@@ -1,36 +1,33 @@
-#include <stdint.h>
-#include <drivers/gpio.h>
 #include "hd44780.h"
 
 static struct hd44780_display disp = {
-    .port = NULL,
-    .pin[D4] = HD44780_PIN_D4,
-    .pin[D5] = HD44780_PIN_D5,
-    .pin[D6] = HD44780_PIN_D6,
-    .pin[D7] = HD44780_PIN_D7,
-    .pin[RS] = HD44780_PIN_RS,
-    .pin[EN] = HD44780_PIN_EN,
+    .pin_dt[D4] = HD44780_PIN_D4,
+    .pin_dt[D5] = HD44780_PIN_D5,
+    .pin_dt[D6] = HD44780_PIN_D6,
+    .pin_dt[D7] = HD44780_PIN_D7,
+    .pin_dt[RS] = HD44780_PIN_RS,
+    .pin_dt[EN] = HD44780_PIN_EN,
 };
 
 static inline void
 hd44780_pulse()
 {
     // en
-    gpio_pin_set(disp.port, disp.pin[EN], 1);
+    gpio_pin_set_dt(&(disp.pin_dt[EN]), 1);
     // ds says min 1 us, but only 1000 works reliably
     k_usleep(1000);
     // dis
-    gpio_pin_set(disp.port, disp.pin[EN], 0);
+    gpio_pin_set_dt(&(disp.pin_dt[EN]), 0);
 }
 
 static inline void
 hd44780_nibble(uint8_t n)
 {
-    gpio_pin_set(disp.port, disp.pin[RS], 0); //cmd
-    gpio_pin_set(disp.port, disp.pin[D7], (n & (1 << 7)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D6], (n & (1 << 6)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D5], (n & (1 << 5)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D4], (n & (1 << 4)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[RS]), 0); //cmd
+    gpio_pin_set_dt(&(disp.pin_dt[D7]), (n & (1 << 7)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D6]), (n & (1 << 6)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D5]), (n & (1 << 5)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D4]), (n & (1 << 4)) ? 1 : 0);
     hd44780_pulse();
 }
 
@@ -38,16 +35,16 @@ static void
 hd44780_byte(uint8_t b)
 {
     // high nibble
-    gpio_pin_set(disp.port, disp.pin[D7], (b & (1 << 7)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D6], (b & (1 << 6)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D5], (b & (1 << 5)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D4], (b & (1 << 4)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D7]), (b & (1 << 7)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D6]), (b & (1 << 6)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D5]), (b & (1 << 5)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D4]), (b & (1 << 4)) ? 1 : 0);
     hd44780_pulse();
     // low nibble
-    gpio_pin_set(disp.port, disp.pin[D7], (b & (1 << 3)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D6], (b & (1 << 2)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D5], (b & (1 << 1)) ? 1 : 0);
-    gpio_pin_set(disp.port, disp.pin[D4], (b & (1 << 0)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D7]), (b & (1 << 3)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D6]), (b & (1 << 2)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D5]), (b & (1 << 1)) ? 1 : 0);
+    gpio_pin_set_dt(&(disp.pin_dt[D4]), (b & (1 << 0)) ? 1 : 0);
     hd44780_pulse();
 
     // most commands take about 37 us, 1000 to be safe
@@ -58,7 +55,7 @@ void
 hd44780_data(uint8_t val)
 {
     // rs high - data
-    gpio_pin_set(disp.port, disp.pin[RS], 1);
+    gpio_pin_set_dt(&(disp.pin_dt[RS]), 1);
     hd44780_byte(val);
 }
 
@@ -67,7 +64,7 @@ hd44780_cmd(uint8_t cmd, uint8_t flags)
 {
     cmd |= flags;
     // rs low - command
-    gpio_pin_set(disp.port, disp.pin[RS], 0);
+    gpio_pin_set_dt(&(disp.pin_dt[RS]), 0);
     hd44780_byte(cmd);
 }
 
@@ -101,19 +98,12 @@ hd44780_init()
 {
     uint32_t i;
 
-    disp.port = device_get_binding(HD44780_PORT);
-    if (disp.port == NULL)
-    {
-        printk("HD44780: Failed to get binding for " HD44780_PORT "\n");
-        return;
-    }
-
     for(i = 0; i < PINS_MAX; i++)
     {
-        int res = gpio_pin_configure(disp.port, disp.pin[i], GPIO_OUTPUT);
+        int res = gpio_pin_configure_dt(&(disp.pin_dt[i]), GPIO_OUTPUT);
         if (res != 0)
         {
-            printk("HD44780: Failed to configure pin %u: %d\n", disp.pin[i], res);
+            printk("HD44780: Failed to configure pin %u: %d\n", i, res);
         }
     }
 
