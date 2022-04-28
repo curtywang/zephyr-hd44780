@@ -5,12 +5,13 @@
 // #include "led.h"
 #include <hd44780.h>
 // #include "adc.h"
+// #include <array>
 
 const char str1[] = "Hello from";
 const char str2[] = CONFIG_BOARD;
 
 
-void write_to_lcd(char* input_str, size_t input_str_len) {
+void write_to_lcd(const char* input_str, size_t input_str_len) {
     for(size_t i = 0; i < 16; i++) {
         if (i >= input_str_len) {
             hd44780_data(' ');
@@ -37,7 +38,7 @@ void main(void)
         hd44780_pos(1, 0);
         write_to_lcd(str2, sizeof(str2) - 1);
 
-        k_sleep(K_MSEC(1000));
+        k_sleep(K_MSEC(500));
         
         hd44780_pos(0, 0);
         for(size_t i = 0; i < 16; i++)
@@ -51,7 +52,7 @@ void main(void)
             hd44780_data('O');
         }
 
-        k_sleep(K_MSEC(1000));
+        k_sleep(K_MSEC(500));
         
     }
 }

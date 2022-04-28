@@ -1,6 +1,10 @@
 #ifndef HD44780_H
 #define HD44780_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <zephyr.h>
 #include <device.h>
 #include <devicetree.h>
@@ -72,10 +76,15 @@ struct hd44780_display
     struct gpio_dt_spec pin_dt[PINS_MAX];
 };
 
+
 void hd44780_init();
 void hd44780_cmd(uint8_t cmd, uint8_t flags);
-void hd44780_data(uint8_t val);
+void hd44780_data(char val);
 void hd44780_pos(uint8_t row, uint8_t col);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // HD44780_H

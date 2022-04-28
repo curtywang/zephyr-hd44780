@@ -52,7 +52,7 @@ hd44780_byte(uint8_t b)
 }
 
 void
-hd44780_data(uint8_t val)
+hd44780_data(char val)
 {
     // rs high - data
     gpio_pin_set_dt(&(disp.pin_dt[RS]), 1);
