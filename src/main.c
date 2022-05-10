@@ -1,11 +1,14 @@
 #include <zephyr.h>
+#include <devicetree.h>
+#include <stdlib.h>
 #include <sys/printk.h>
 #include <inttypes.h>
-// #include "button.h"
-// #include "led.h"
 #include <hd44780.h>
-// #include "adc.h"
-// #include <array>
+
+// setup network and mqtt client
+#include <wifi_setup.h>
+#include <mqtt_setup.h>
+
 
 const char str1[] = "Hello from";
 const char str2[] = CONFIG_BOARD;
@@ -25,6 +28,9 @@ void write_to_lcd(const char* input_str, size_t input_str_len) {
 
 void main(void)
 {
+    initialize_network();
+    mqtt_client_setup_and_connect();
+
     printk("LCD Demo App starting!\n");
 
     hd44780_init();
