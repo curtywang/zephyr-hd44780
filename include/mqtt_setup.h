@@ -202,28 +202,28 @@ int mqtt_client_process_keepalive()
 	int64_t start_time = k_uptime_get();
 	int rc;
 
-	while (remaining > 0 && connected) {
-		if (wait(remaining)) {
+	while (remaining > 0 && the_mqtt_client_connected) {
+		if (mqtt_wait_poll()) {
 			rc = mqtt_input(&the_mqtt_client);
-			if (rc != 0) {
-				PRINT_RESULT("mqtt_input", rc);
+			if (rc != 0) { 
+				printk("MQTT Client error: mqtt_input %d\n", rc);
 				return rc;
 			}
 		}
 
-		rc = mqtt_live((&the_mqtt_client);
+		rc = mqtt_live(&the_mqtt_client);
 		if (rc != 0 && rc != -EAGAIN) {
-			PRINT_RESULT("mqtt_live", rc);
+			printk("MQTT Client error: mqtt_live %d\n", rc);
 			return rc;
 		} else if (rc == 0) {
-			rc = mqtt_input((&the_mqtt_client);
+			rc = mqtt_input(&the_mqtt_client);
 			if (rc != 0) {
-				PRINT_RESULT("mqtt_input", rc);
+				printk("MQTT Client error: mqtt_input %d\n", rc);
 				return rc;
 			}
 		}
 
-		remaining = timeout + start_time - k_uptime_get();
+		remaining = the_mqtt_client_connected + start_time - k_uptime_get();
 	}
 
 	return 0;
