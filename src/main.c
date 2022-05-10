@@ -28,8 +28,9 @@ void write_to_lcd(const char* input_str, size_t input_str_len) {
 
 void main(void)
 {
-    initialize_network();
-    mqtt_client_setup_and_connect();
+    // uint8_t msg_to_publish[40];
+    // initialize_network();
+    // mqtt_client_setup_and_connect();
 
     printk("LCD Demo App starting!\n");
 
@@ -44,6 +45,8 @@ void main(void)
         hd44780_pos(1, 0);
         write_to_lcd(str2, sizeof(str2) - 1);
 
+        // snprintf(msg_to_publish, 40, "hello! %d", k_uptime_get_32());
+        // mqtt_client_publish_message(msg_to_publish, 40);
         k_sleep(K_MSEC(500));
         
         hd44780_pos(0, 0);
@@ -58,6 +61,7 @@ void main(void)
             hd44780_data('O');
         }
 
+        mqtt_client_process_keepalive();
         k_sleep(K_MSEC(500));
         
     }
